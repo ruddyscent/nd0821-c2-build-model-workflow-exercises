@@ -6,12 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Needed for string substitution
 SHELL ["/bin/bash", "-c"]
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update  && apt-get -y install --no-install-recommends \
-#     neovim
-
 COPY requirements.txt /tmp/pip-tmp/
 
 RUN python -m pip install --upgrade pip \
- && pip install --upgrade --no-cache-dir -r /tmp/pip-tmp/requirements.txt \
+ && pip install --upgrade --no-cache-dir --root-user-action=ignore -r /tmp/pip-tmp/requirements.txt \
  && rm -rf /tmp/pip-tmp
