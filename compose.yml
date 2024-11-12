@@ -10,12 +10,5 @@ services:
     ports:
       - "${JUPYTER_PORT:-8888}:8888"
       - "${TENSORBOARD_PORT:-6006}:6006"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              device_ids: ["${GPU_DEVICES:-0}"]
-              capabilities: [gpu]
     working_dir: /home
-    command: jupyter-lab --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token="${JUPYTER_TOKEN:-letmein}" --NotebookApp.password="" --notebook-dir=/home
+    stdin_open: true

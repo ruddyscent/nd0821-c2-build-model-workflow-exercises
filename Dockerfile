@@ -1,10 +1,19 @@
-FROM nvcr.io/nvidia/pytorch:24.10-py3
+FROM ubuntu:22.04
 
 # Let us install tzdata painlessly
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Needed for string substitution
 SHELL ["/bin/bash", "-c"]
+
+# [Optional] Uncomment this section to install additional OS packages.
+RUN apt-get update \
+ && export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install --no-install-recommends \
+    python3 \
+    python3-pip \
+    python-is-python3 \
+    wget
 
 COPY requirements.txt /tmp/pip-tmp/
 
